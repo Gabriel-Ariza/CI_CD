@@ -4,3 +4,4 @@ dist/
 build/
 .github/
 sumar.test.js
+readme.md

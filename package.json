@@ -1,7 +1,7 @@
 {
     "name": "ci_cd",
     "version": "1.0.0",
-    "description": "Pipeline de CI/CD para alumnos",
+    "description": "Pipeline de CI/CD",
     "main": "main.js",
     "scripts": {
         "format:check": "prettier --check .",
