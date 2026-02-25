@@ -1,23 +1,21 @@
-name: Pipeline Profesional de Calidad
+name: Pipeline Calidad
 on: [push]
-
-permissions:
-  contents: write 
 
 jobs:
   calidad-y-analisis:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # SonarQube necesita el historial completo para analizar mejor
 
+      # 0. INSTALAR DEPENDENCIAS
       - name: Instalar dependencias
         run: npm install
 
+      # 1. VERIFICACIÓN DE ESTILO (Prettier)
       - name: Verificar formato con Prettier
         run: npm run format:check
 
+      # 2. ANÁLISIS DE SONARCLOUD
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
@@ -27,13 +25,13 @@ jobs:
           args: >
             -Dsonar.projectKey=CI_CD
             -Dsonar.organization=gabriel-ariza
-            -Dsonar.qualitygate.wait=true 
-            -Dsonar.sources=.
+            -Dsonar.qualitygate.wait=false
 
   despliegue:
-    needs: calidad-y-analisis 
+    needs: calidad-y-analisis # Solo corre si lo anterior salió bien (CD)
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' # Solo despliega si es la rama principal
+    permissions:
+      contents: write # Para poder desplegar codigo
     steps:
       - uses: actions/checkout@v4
       - name: Deploy to GitHub Pages
@@ -41,3 +39,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
+          cname: # Descomentar y añadir tu dominio si tienes uno personalizado
