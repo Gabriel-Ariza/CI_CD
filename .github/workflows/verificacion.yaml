@@ -1,0 +1,43 @@
+name: Pipeline Calidad
+on: [push]
+
+permissions:
+  contents: write # Para poder desplegar codigo
+
+jobs:
+  calidad-y-analisis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 0. INSTALAR DEPENDENCIAS
+      - name: Instalar dependencias
+        run: npm install
+
+      # 1. VERIFICACIÓN DE ESTILO (Prettier)
+      - name: Verificar formato con Prettier
+        run: npm run format:check
+
+      # 2. ANÁLISIS DE SONARCLOUD
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=CI_CD
+            -Dsonar.organization=gabriel-ariza
+            -Dsonar.qualitygate.wait=false
+
+  despliegue:
+    needs: calidad-y-analisis # Solo corre si lo anterior salió bien (CD)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          cname: # Descomentar y añadir tu dominio si tienes uno personalizado
