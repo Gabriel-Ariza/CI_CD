@@ -28,7 +28,7 @@ jobs:
           args: >
             -Dsonar.projectKey=Gabriel-Ariza_CI_CD
             -Dsonar.organization=gabriel-ariza
-            -Dsonar.qualitygate.wait=false
+            -Dsonar.qualitygate.wait=true
 
   despliegue:
     needs: calidad-y-analisis # Solo corre si lo anterior salió bien (CD)
