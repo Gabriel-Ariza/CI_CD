@@ -1,0 +1,16 @@
+{
+    "name": "ci_cd",
+    "version": "1.0.0",
+    "description": "Pipeline de CI/CD para alumnos",
+    "main": "main.js",
+    "scripts": {
+        "format:check": "prettier --check .",
+        "format:fix": "prettier --write ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "prettier": "^3.0.0"
+    }
+}
