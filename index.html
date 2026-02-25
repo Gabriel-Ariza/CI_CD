@@ -26,7 +26,7 @@
         <script src="main.js"></script>
         <script>
             function calcular() {
-                const num1 = Number.parseFloat(
+/*                 const num1 = Number.parseFloat(
                     document.getElementById('num1').value,
                 );
                 const num2 = Number.parseFloat(
@@ -41,6 +41,19 @@
                 const resultado = sumar(num1, num2);
                 document.getElementById('operacion').textContent =
                     num1 + ' + ' + num2 + ' =';
+                document.getElementById('valor').textContent = resultado;
+                document.getElementById('resultado').classList.add('mostrar'); */
+
+                // ERROR 1: Uso de 'var' en lugar de 'const' (Bad practice)
+                var num1 = document.getElementById('num1').value;
+                var num2 = document.getElementById('num2').value;
+
+                // ERROR 2: El temido 'eval()'. 
+                // Esto es una vulnerabilidad de seguridad crítica (Inyección de código).
+                const resultado = eval(num1 + "+" + num2);
+                // ERROR 3: Console log innecesario (Code Smell)
+                console.log("El resultado es: " + resultado);
+                document.getElementById('operacion').textContent = num1 + ' + ' + num2 + ' =';
                 document.getElementById('valor').textContent = resultado;
                 document.getElementById('resultado').classList.add('mostrar');
             }
