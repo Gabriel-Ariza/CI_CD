@@ -5,7 +5,8 @@ jobs:
   calidad-y-analisis:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # Pin v4.2.2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      # Pin v4.2.2
 
       # 0. INSTALAR DEPENDENCIAS
       - name: Instalar dependencias
@@ -17,7 +18,9 @@ jobs:
 
       # 2. ANÁLISIS DE SONARCLOUD
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@030132338505e612984144e54c73656334582f3a # Pin v5.0.0
+        uses: SonarSource/sonarqube-scan-action@030132338505e612984144e54c73656334582f3a
+          # Pin v5.0.0
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -33,9 +36,11 @@ jobs:
     permissions:
       contents: write # Para poder desplegar codigo
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # Pin v4.2.2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      # Pin v4.2.2
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@4f9cc66107dbfe9bd222d6859600100742569b31 # Pin v4.0.0
+        uses: peaceiris/actions-gh-pages@4f9cc66107dbfe9bd222d6859600100742569b31
+        # Pin v4.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
