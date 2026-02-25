@@ -18,7 +18,7 @@ jobs:
 
       # 2. ANÁLISIS DE SONARCLOUD
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        uses: SonarSource/sonarqube-scan-action@030132338505e612984144e54c73656334582f3a
           # Pin v5.0.0
 
         env:
