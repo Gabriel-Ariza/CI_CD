@@ -19,6 +19,7 @@ jobs:
       # 2. ANÁLISIS DE SONARCLOUD
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@a31c9398be7ace6bbfaf30c0bd5d415f843d45e9
+        # pin v7 a31c9398be7ace6bbfaf30c0bd5d415f843d45e9
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
