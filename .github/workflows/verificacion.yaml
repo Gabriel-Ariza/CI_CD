@@ -5,7 +5,7 @@ jobs:
   calidad-y-analisis:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@v4.2.2
       # Pin v4.2.2
 
       # 0. INSTALAR DEPENDENCIAS
@@ -18,7 +18,7 @@ jobs:
 
       # 2. ANÁLISIS DE SONARCLOUD
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@030132338505e612984144e54c73656334582f3a
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
           # Pin v5.0.0
 
         env:
